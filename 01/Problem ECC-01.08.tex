@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{tcolorbox}
+
+\title{ECC, problem 01.**08}
+\author{Roman}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem}
+Prove that three points on an elliptic curve ${E}$ over the set of rational numbers $\mathbb{Q}$ are collinear
+iff they add to the identity element $\mathcal{O}$. To simplify the proof, you may assume that the three points
+are distinct.
+
+\pagebreak
+
+\section*{Solution}
+\begin{proof}
+
+
+\item{\textbf{Sufficient condition.}}
+
+
+Let $P, Q, R$ be three points on $E$ such that $P + Q + R = \mathcal{O}$. We want to show that $P, Q, R$ are collinear, i.e.
+
+\begin{tcolorbox}[colframe=blue, colback=gray!10]
+\begin{equation*}
+    P + Q + R = \mathcal{O} \implies P, Q, R \text{ are  collinear}
+\end{equation*}
+\end{tcolorbox}
+
+The $x$-coordinates of $P + Q + R$ is (from the explicit formula for the addition law on ${E}$)
+\begin{equation*}
+    x_{P+Q+R} = \frac{(y_{P+Q}-y_R)^2}{(x_{P+Q}-x_R)^2} - x_{P+Q} - x_R
+\end{equation*}
+
+As $P + Q + R = \mathcal{O}$, we have $x_{P+Q} = x_R$. From that, using the explicit formula for the addition law on ${E}$
+for the second time,
+\begin{equation*}
+    x_{P+Q} = x_R = \frac{(y_P-y_Q)^2}{(x_P-x_Q)^2} - x_P -x_Q
+\end{equation*}
+or
+\begin{equation*}
+    \frac{(y_P-y_Q)^2}{(x_P-x_Q)^2} = x_P + x_Q + x_R
+\end{equation*}
+
+The group law on ${E}$ is commutative and associative, so from $P + Q + R = \mathcal{O}$ with choosing another
+order of summation one gets:
+\begin{equation*}
+    \frac{(y_P-y_Q)^2}{(x_P-x_Q)^2} = \frac{(y_P-y_R)^2}{(x_P-x_R)^2} = \frac{(y_Q-y_R)^2}{(x_Q-x_R)^2}
+\end{equation*}
+which states that the slopes of the lines $PQ$, $PR$, $QR$ are equal. Therefore, $P, Q, R$ are collinear.
+
+
+\item{\textbf{Necessary condition.}}
+
+
+Let $P, Q, R$ be three points on ${E}$ such that $P, Q, R$ are collinear. We want to show that $P + Q + R = \mathcal{O}$, i.e.
+
+\begin{tcolorbox}[colframe=blue, colback=gray!10]
+    \begin{equation*}
+        P + Q + R = \mathcal{O} \impliedby P, Q, R \text{ are  collinear}
+    \end{equation*}
+\end{tcolorbox}
+
+From the associative property of the group law on ${E}$, we have
+\begin{equation*}
+    (P + Q) + R = P + (Q + R)
+\end{equation*}
+For the $x$-coordinates of the both sides of the equation above, we have
+\begin{equation*}
+    x_{(P + Q) + R} = \frac{(y_{P+Q}-y_R)^2}{(x_{P+Q}-x_R)^2} - x_{P+Q} - x_R
+\end{equation*}
+and
+\begin{equation*}
+    x_{P + (Q + R)} = \frac{(y_P-y_{Q+R})^2}{(x_P-x_{Q+R})^2} - x_P - x_{Q+R}
+\end{equation*}
+which combined together give
+\begin{equation*}
+    \frac{(y_{P+Q}-y_R)^2}{(x_{P+Q}-x_R)^2} - x_{P+Q} - x_R = \frac{(y_P-y_{Q+R})^2}{(x_P-x_{Q+R})^2} - x_P - x_{Q+R}   
+\end{equation*}
+
+Using the explicit formula for the addition law on ${E}$, we have for the $x$-coordinates of $P + Q$ and $Q + R$:
+\begin{equation*}
+    x_{P+Q} = \frac{(y_P-y_Q)^2}{(x_P-x_Q)^2} - x_P - x_Q
+\end{equation*}
+and 
+\begin{equation*}
+    x_{Q+R} = \frac{(y_Q-y_R)^2}{(x_Q-x_R)^2} - x_Q - x_R
+\end{equation*}
+Substituting these into the equation above, it folows that the following equation holds for any three collinear points $P, Q, R$:
+\begin{equation*}
+    \frac{(y_{P+Q}-y_R)^2}{(x_{P+Q}-x_R)^2} - \frac{(y_P-y_{Q+R})^2}{(x_P-x_{Q+R})^2} = 0   
+\end{equation*}
+as the slopes of the lines $PQ$ and $QR$ are equal. This equation can be rewritten as
+\begin{equation*}
+    \frac{(y_{P+Q}-y_R)^2}{(x_{P+Q}-x_R)^2} = \frac{(y_P-y_{Q+R})^2}{(x_P-x_{Q+R})^2}
+\end{equation*}
+For that to hold for any three collinear points $P, Q, R$, the following equation must hold for any two points $P, Q$:
+\begin{equation*}
+    x_{P+Q} - x_R = x_P - x_{Q+R} = 0
+\end{equation*}
+That proves that $P + Q + R = \mathcal{O}$.
+
+
+\item{\textbf{Conclusion.}}
+
+
+We have shown that three points on an elliptic curve ${E}$ over the set of rational numbers $\mathbb{Q}$ are collinear
+iff they add to the identity element $\mathcal{O}$:
+
+\begin{tcolorbox}[colframe=blue, colback=gray!10]
+    \begin{equation*}
+        P + Q + R = \mathcal{O} \iff P, Q, R \text{ are  collinear}
+    \end{equation*}
+\end{tcolorbox}
+
+
+\end{proof}
+
+\end{document}
