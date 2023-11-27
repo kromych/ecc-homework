@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=green, filecolor=magenta, urlcolor=red]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{tcolorbox}
+\usepackage{empheq}
+
+\title{ECC, problem 02.***08}
+\author{Roman}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem}
+
+Let $E(\mathbb{Q}) : y^2 = f(x) = x^3 + Ax + B$. Prove that
+\begin{equation*}
+    \frac{d^2 y}{dx^2} = \frac{2 f''(x)f(x) - f'(x)^2}{4 y f(x)} = \frac{\psi_3(x)}{4 y f(x)}
+\end{equation*}
+where $\psi_3(x) = 3x^4 + 6Ax^2 + 12Bx - A^2$ is the \textbf{third division polynomial} of
+$E$.\footnote{
+    It is a polynomial whose roots are the $x$-coordinates of the 3-torsion points of $E$.
+    In general, there is an $m$-th division polynomial $\psi_m(x)$ whose roots give the $x$-coordinates
+    of the $m$-torsion points of $E$. See \href{https://en.wikipedia.org/wiki/Division_polynomials}{this link} for information.
+}
+
+
+Use this to deduce that a point $P = (x,y) \in E $ (not equal to $\infty$)
+is a point of order three if and only if $P \neq \infty$ and $P$ is a point of inflection on the curve $E$.
+
+\pagebreak
+
+\section*{Solution}
+\begin{proof}
+
+First, we compute the second derivative of $y$ with respect to $x$. For the first derivative, we have
+\begin{equation}
+    2yy' = f'(x)
+    \label{eq:1st-derivative}
+\end{equation}
+Differentiating both sides with respect to $x$ gives
+\begin{equation}
+    2y'^2 + 2yy'' = f''(x) 
+\end{equation}
+Solving equation (\ref{eq:1st-derivative}) for $y'$ and substituting into the above equation gives
+\begin{equation}
+    2y \left( \frac{f'(x)}{2y} \right)^2 + 2yy'' = f''(x)
+\end{equation}
+Now we can simplify the left-hand side to get the desired result:
+\begin{equation}
+    \frac{d^2 y}{dx^2} = \frac{2 f''(x)f(x) - f'(x)^2}{4 y f(x)}
+\end{equation}
+That holds for any implicit function $y^2 = f(x)$. For our curve $E(\mathbb{Q})$ that is
+\begin{equation}
+    y^2 = x^3 + Ax + B  
+\end{equation}
+we have
+\begin{equation}
+    \frac{d^2 y}{dx^2} = \frac{2 f''(x)f(x) - f'(x)^2}{4 y f(x)} \stackrel{\text{[some laborious algebra]}}{=} \frac{3x^4 + 6Ax^2 + 12Bx - A^2}{4 y f(x)} = \frac{\psi_3(x)}{4 y f(x)}
+\end{equation}
+
+To find the point of inflection, we need the roots of the third division polynomial $\psi_3(x)$. With a help of a computer, we find that \footnote{
+    A curious property of the roots is $\sum_i x_i^2 = -4A$.  Interesting, like a norm of some vector (it's $\le 0$ due to the complex roots)!
+    Computed $\sum_i x_i^2$ for $\psi_2$: $-2A$,  $\psi_4$ : $-10A$, $\psi_5$ : $-124/5A$ (can multiply by $m$?), $\psi_6$ : $-50A$, $\psi_7$ : $-88A$,
+    $\psi_8$ : $-148A$. That last one is a polynomial of the 33rd power and takes 266 KiB, sure I was leaning on Sage Math for getting the explicit form
+    for $\psi_m$ and Wolfram Mathematica for manipulating with roots. Can't compute more it appears. The question is what is that sequence, known or
+    even useful perhaps?
+}
+\begin{align}
+    x_1 = \frac{ \sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}-\sqrt{-\sqrt[3]{8 A^3+54 B^2}-\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_2 = \frac{ \sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}+\sqrt{-\sqrt[3]{8 A^3+54 B^2}-\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_3 = \frac{-\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}-\sqrt{-\sqrt[3]{8 A^3+54 B^2}+\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_4 = \frac{-\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}+\sqrt{-\sqrt[3]{8 A^3+54 B^2}+\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}}-4 A}}{\sqrt{6}}
+\end{align}
+Using the discriminant $\Delta = 4A^3 + 27B^2$ of the cubic polynomial $f(x)$, we can simplify the above expressions to
+\begin{align}
+    x_1 = \frac{ \sqrt{\sqrt[3]{2 \Delta}-2 A}-\sqrt{-\sqrt[3]{2 \Delta}-\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{2 \Delta}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_2 = \frac{ \sqrt{\sqrt[3]{2 \Delta}-2 A}+\sqrt{-\sqrt[3]{2 \Delta}-\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{2 \Delta}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_3 = \frac{-\sqrt{\sqrt[3]{2 \Delta}-2 A}-\sqrt{-\sqrt[3]{2 \Delta}+\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{2 \Delta}-2 A}}-4 A}}{\sqrt{6}} \\
+    x_4 = \frac{-\sqrt{\sqrt[3]{2 \Delta}-2 A}+\sqrt{-\sqrt[3]{2 \Delta}+\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{2 \Delta}-2 A}}-4 A}}{\sqrt{6}}
+\end{align}
+
+Introducing
+\begin{align}
+    M = \sqrt[3]{2 \Delta} - 2A \\
+    N = \frac{6 \sqrt{6} B}{\sqrt{M}} - 6A
+\end{align}
+we further simplify the expressions for the roots to
+\begin{align}
+    x_1 = \frac{ \sqrt{M}-\sqrt{-M-N}}{\sqrt{6}} \\
+    x_2 = \frac{ \sqrt{M}+\sqrt{-M-N}}{\sqrt{6}} \\
+    x_3 = \frac{-\sqrt{M}-\sqrt{-M+N}}{\sqrt{6}} \\
+    x_4 = \frac{-\sqrt{M}+\sqrt{-M+N}}{\sqrt{6}}
+\end{align}
+
+In the case of $B = 0$, the roots are:
+\begin{align}
+    x_1 = -\sqrt{\frac{2}{\sqrt{3}}+1} \quad \sqrt{-A}    \\
+    x_2 = \sqrt{\frac{2}{\sqrt{3}}+1}  \quad \sqrt{-A}    \\
+    x_3 = -\sqrt{\frac{2}{\sqrt{3}}-1} \quad \sqrt{A}     \\
+    x_4 = \sqrt{\frac{2}{\sqrt{3}}-1}  \quad \sqrt{A} 
+\end{align}
+
+In the case of $A = 0$, the roots are:
+\begin{align}
+    x_1 = 0 \\
+    x_2,x_3,x_4 = -\sqrt[3]{4 B}
+\end{align}
+    
+
+\item{\textbf{Sufficient condition.}}
+
+
+\item{\textbf{Necessary condition.}}
+
+
+\item{\textbf{Conclusion.}}
+
+
+\end{proof}
+
+
+\end{document}
