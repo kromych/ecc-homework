@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=green, filecolor=magenta, urlcolor=red]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{tcolorbox}
+\usepackage{empheq}
+
+\title{ECC, problem 02.$^\dagger$10}
+\author{Roman}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem}
+
+Let $E/\mathbb{Q}$ be an elliptic curve. Prove that $E[m]$ has $m^2$ points of order $m$.
+
+\pagebreak
+
+\section*{Solution}
+\begin{proof}
+
+As follows from the Mordell-Weil theorem,
+\begin{equation}
+    E[m] \cong Z/mZ \times Z/mZ
+\end{equation}
+Employing that fact makes it now obvious that
+\begin{equation}
+    \#E[m] = m^2
+\end{equation}
+
+\end{proof}
+
+Another way to see this might be counting the roots of the $m$-division polynomial $\psi_m(x)$.
+
+
+For odd $m$, the division polynomial is of power $(m^2-1)/2$ so it has that many roots. Adding points with $-y$ and $\infty$ gives 
+\begin{equation}
+    \#E[m] = \frac{m^2-1}{2} * 2 + 1 = m^2
+\end{equation}
+i.e. $m^2$ points.
+
+For even $m$, the division polynomial is a product of a polynomial of power $(m^2-4)/2$ and $y(x)$ ($y$ is the $y$-coordinate of the point on the curve).
+The first factor gives $(m^2-4)/2$ roots. Adding to that points symmetric across $x$-axis, then adding to that $3$ points where $y(x) = 0$ and $\infty$
+\begin{equation}
+    \#E[m] = \frac{m^2-4}{2} * 2 + 3 + 1 = m^2
+\end{equation}
+i.e. $m^2$ points. The gap in this treatment is the repeated roots of the division polynomials. I'm not sure how to deal with that.
+
+\end{document}

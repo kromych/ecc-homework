@@ -8,7 +8,7 @@
 \usepackage{tcolorbox}
 \usepackage{empheq}
 
-\title{ECC, problem 02.***08}
+\title{ECC, problem 02.***09}
 \author{Roman}
 \date{\today}
 
@@ -65,11 +65,10 @@ we have
 \end{equation}
 
 To find the point of inflection, we need the roots of the third division polynomial $\psi_3(x)$. With a help of a computer, we find that \footnote{
-    A curious property of the roots is $\sum_i x_i^2 = -4A$.  Interesting, like a norm of some vector (it's $\le 0$ due to the complex roots)!
+    A curious property of the roots is $\sum_i x_i^2 = -4A$.
     Computed $\sum_i x_i^2$ for $\psi_2$: $-2A$,  $\psi_4$ : $-10A$, $\psi_5$ : $-124/5A$ (can multiply by $m$?), $\psi_6$ : $-50A$, $\psi_7$ : $-88A$,
-    $\psi_8$ : $-148A$. That last one is a polynomial of the 33rd power and takes 266 KiB, sure I was leaning on Sage Math for getting the explicit form
-    for $\psi_m$ and Wolfram Mathematica for manipulating with roots. Can't compute more it appears. The question is what is that sequence, known or
-    even useful perhaps?
+    $\psi_8$ : $-148A$. That last one is a polynomial of the 33rd power and takes 266 KiB, I was leaning on Sage Math for getting  $\psi_m$ and
+    Wolfram Mathematica for manipulating with roots. There are simple identities for other powers, and especially simple for the sum: $\sum_i x_i = 0$.
 }
 \begin{align}
     x_1 = \frac{ \sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}-\sqrt{-\sqrt[3]{8 A^3+54 B^2}-\frac{6 \sqrt{6} B}{\sqrt{\sqrt[3]{8 A^3+54 B^2}-2 A}}-4 A}}{\sqrt{6}} \\
@@ -98,20 +97,14 @@ we further simplify the expressions for the roots to
     x_4 = \frac{-\sqrt{M}+\sqrt{-M+N}}{\sqrt{6}}
 \end{align}
 
-In the case of $B = 0$, the roots are:
-\begin{align}
-    x_1 = -\sqrt{\frac{2}{\sqrt{3}}+1} \quad \sqrt{-A}    \\
-    x_2 = \sqrt{\frac{2}{\sqrt{3}}+1}  \quad \sqrt{-A}    \\
-    x_3 = -\sqrt{\frac{2}{\sqrt{3}}-1} \quad \sqrt{A}     \\
-    x_4 = \sqrt{\frac{2}{\sqrt{3}}-1}  \quad \sqrt{A} 
-\end{align}
-
-In the case of $A = 0$, the roots are:
-\begin{align}
-    x_1 = 0 \\
-    x_2,x_3,x_4 = -\sqrt[3]{4 B}
-\end{align}
-    
+In particular, that means that
+\begin{equation}
+    E[3] = \{ \infty, (x_1, y_1), (x_2, y_2), (x_3, y_3), (x_4, y_4), (x_1, -y_1), (x_2, -y_2), (x_3, -y_3), (x_4, -y_4) \}
+\end{equation}
+and
+\begin{equation}
+    | E[3] | = 9
+\end{equation}
 
 \item{\textbf{Sufficient condition.}}
 
